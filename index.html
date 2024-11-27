@@ -1,95 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC 愛心券領取系統</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #f8f8f8;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        input {
-            padding: 10px;
-            font-size: 18px;
-            width: 100%;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .hidden {
-            display: none;
-        }
-        .success {
-            color: green;
-        }
-        .error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/verifyCode.js" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>NFC 愛心券領取</h1>
         <p>請輸入從食物銀行獲得的愛心代碼。</p>
-        <input type="text" id="couponCode" placeholder="輸入您的愛心代碼">
+        <div style="position: relative;">
+            <input type="text" id="couponCode">
+        </div>
         <button onclick="verifyCode()">兌換食物</button>
         <div id="result" style="margin-top: 20px; font-size: 18px;"></div>
     </div>
-
-    <script>
-        // 模擬後台的有效代碼列表
-        const validCodes = {
-            "CARE1234": { item: "泡麵套餐", claimed: false },
-            "LOVE5678": { item: "飲料組合", claimed: false }
-        };
-
-        function verifyCode() {
-            // 獲取用戶輸入的代碼
-            const userCode = document.getElementById("couponCode").value.trim();
-            const resultDiv = document.getElementById("result");
-
-            // 驗證代碼是否有效
-            if (validCodes[userCode]) {
-                if (!validCodes[userCode].claimed) {
-                    // 標記代碼已使用
-                    validCodes[userCode].claimed = true;
-                    resultDiv.innerHTML = `成功兌換！您領取的是：<strong>${validCodes[userCode].item}</strong>`;
-                    resultDiv.className = "success";
-                } else {
-                    resultDiv.innerHTML = "此代碼已被使用，請聯繫工作人員。";
-                    resultDiv.className = "error";
-                }
-            } else {
-                resultDiv.innerHTML = "無效的愛心代碼，請重試。";
-                resultDiv.className = "error";
-            }
-        }
-    </script>
 </body>
 </html>
-
-
